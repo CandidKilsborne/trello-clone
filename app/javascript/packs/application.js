@@ -15,3 +15,20 @@ require("channels")
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
+
+import Vue from 'vue/dist/vue.esm';
+import App from '../app.vue';
+
+document.addEventListener('turbolinks:load', function() {
+  let boards = document.querySelector("#boards");
+  if (boards != undefined) {
+    const app = new Vue({
+      el: boards,
+      data: {
+        lists: JSON.parse(boards.dataset.lists)
+      },
+      template: "<App :original_lists='lists' />",
+      components: { App }
+    });
+  }
+});
